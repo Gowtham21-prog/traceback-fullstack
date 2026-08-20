@@ -15,7 +15,14 @@
 
 import { MOCK_CASES } from '../data/mockCases';
 
-const USE_MOCK = true;
+// Default behavior:
+// - During local dev (Vite dev server) import.meta.env.DEV === true, so we
+//   keep the mock layer unless you explicitly set VITE_USE_MOCK to 'false'.
+// - In production builds, import.meta.env.DEV === false, so the mock layer
+//   is active only if you set VITE_USE_MOCK='true'.
+// This makes it safe for local development and lets production be driven by
+// the Vercel env var VITE_USE_MOCK (set that to 'false' to call the real API).
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true' || import.meta.env.DEV;
 
 // In production, prefer an env var over a hardcoded host so the
 // same build works on any device/network:
