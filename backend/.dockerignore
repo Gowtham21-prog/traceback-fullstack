@@ -1,0 +1,9 @@
+# backend/.dockerignore
+target
+.git
+.gitignore
+README.md
+**/node_modules
+**/dist
+.vscode
+.idea
